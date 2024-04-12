@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Draw Letter A</title>
+<style>
+    #canvas-container {
+        position: relative;
+        width: 400px;
+        height: 400px;
+    }
+
+    #canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+    .arrowA {
+        position: absolute;
+        top: 60px;
+        left: 7px;
+        width: 200px;
+        height: 80px;
+        transform: rotate(120deg);
+        z-index: 0;
+    }
+    .arrowAa {
+        position: absolute;
+        top: 60px;
+        left: 190px;
+        width: 200px;
+        height: 80px;
+        transform: rotate(60deg);
+        display: none;
+    }
+
+    .arrowAb {
+        position: absolute;
+        top: 110px;
+        left: 130px;
+        width: 150px;
+        height: 80px;
+        transform: rotate(0deg);
+        display: none;
+    }
+
+    .dot {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background-color: red;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .line {
+        position: absolute;
+        border: 1px solid blue;
+        transition: width 2s, height 2s;
+        transform-origin: top left;
+    }
+    .endtext {
+        position: absolute;
+        top: 250px;
+        left: 60px;
+        font-size: 18px;
+        display: none;
+        
+    
+    }
+
+    .rules {
+        position: absolute;
+        top: 230px;
+        left: 120px;
+        font-size: 18px;
+    }
+
+    
+</style>
+</head>
+<body>
+<div id="canvas-container">
+    <div id="canvas">
+        <div class="dot" id="dot1" style="top: 200px; left: 100px;"></div>
+        <div class="dot" id="dot2" style="top: 200px; left: 300px;"></div>
+        <div class="dot" id="dot3" style="top: 0px; left: 200px;"></div>
+        <div class="dot" id="dot4" style="top: 100px; left: 150px;"></div>
+        <div class="dot" id="dot5" style="top: 100px; left: 250px;"></div>
+        <div class="line" id="line1" style="top: 100px; left: 150px; width: 0; height: 0;"></div>
+        <div class="line" id="line2" style="top: 100px; left: 250px; width: 0; height: 0;"></div>
+        <div class="line" id="line3" style="top: 100px; left: 150px; width: 0; height: 0;"></div>
+    </div>
+    <img class="arrowA" id="arr1" src="arrow1.png" alt="Overlay Image">
+    <img class="arrowAa" id="arr2" src="arrow1.png" alt="Overlay Image">
+    <img class="arrowAb" id="arr3" src="arrow1.png" alt="Overlay Image">
+    <h1 class="rules" id="rules" >Click on vertices to draw</h1>
+    <h1 class="endtext" id="end" >Great youve learnt to draw the letter A</h1>
+</div>
+
+<script>
+var currentLine = 1;
+
+document.getElementById('dot3').addEventListener('click', function() {
+    var dot1 = document.getElementById('dot1');
+    var dot2 = document.getElementById('dot2');
+    var dot3 = document.getElementById('dot3');
+    var line1 = document.getElementById('line1');
+    var line2 = document.getElementById('line2');
+    var line3 = document.getElementById('line3');
+    var arr1 = document.getElementById('arr1');
+    var arr2 = document.getElementById('arr2');
+    var end = document.getElementById('end');
+
+    if (currentLine === 1) {
+        drawLine(dot3, dot1, line1); // Draw left diagonal
+        arr1.style.display = 'none';
+        setTimeout(function() {
+            arr2.style.display = 'block';
+        }, 3000); // Delay for 3000ms (3 second)
+        currentLine++;
+    } else if (currentLine === 2) {
+        drawLine(dot3, dot2, line2); // Draw right diagonal
+        arr2.style.display = 'none';
+        setTimeout(function() {
+            document.getElementById('arr3').style.display = 'block';
+        }, 3000); // Delay for 3000ms (3 second)
+        currentLine++;
+    }
+});
+
+document.getElementById('dot4').addEventListener('click', function() {
+    var dot4 = document.getElementById('dot4');
+    var dot5 = document.getElementById('dot5');
+    var line3 = document.getElementById('line3');
+    var arr2 = document.getElementById('arr2');
+    var arr3 = document.getElementById('arr3');
+    var end = document.getElementById('end');
+
+    if (currentLine === 3) {
+        drawLine(dot4, dot5, line3); // Draw horizontal line
+        arr2.style.display = 'none';
+        setTimeout(function() {
+            arr3.style.display = 'none';
+            end.style.display = 'block';
+        }, 3000); // Delay for 1000ms (1 second)
+        currentLine = 1; // Reset back to the first line
+    }
+});
+
+function drawLine(dot1, dot2, line) {
+    var x1 = dot1.offsetLeft + dot1.offsetWidth / 2;
+    var y1 = dot1.offsetTop + dot1.offsetHeight / 2;
+
+    var x2 = dot2.offsetLeft + dot2.offsetWidth / 2;
+    var y2 = dot2.offsetTop + dot2.offsetHeight / 2;
+
+    var dx = x2 - x1;
+    var dy = y2 - y1;
+
+    var length = Math.sqrt(dx * dx + dy * dy);
+    var angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+    line.style.width = length + 'px';
+    line.style.height = '2px';
+    line.style.transform = 'rotate(' + angle + 'deg)';
+    line.style.top = y1 + 'px';
+    line.style.left = x1 + 'px';
+}
+</script>
+</body>
+</html>

@@ -78,9 +78,17 @@ function connectDots(e) {
     }
     if (col !== null) {
         if (data.clickedDot !== null) {
-            connectedDots.push(data.clickedDot);
-            drawLine(data.clickedDot, col);
-            data.clickedDot = col;
+            // Check if the clicked dot and col are adjacent in data.dots
+            var clickedIndex = data.dots.indexOf(data.clickedDot);
+            var colIndex = data.dots.indexOf(col);
+            if (Math.abs(clickedIndex - colIndex) === 1) {
+                connectedDots.push(data.clickedDot);
+                drawLine(data.clickedDot, col);
+                data.clickedDot = col;
+            } else {
+                // If not adjacent, show alert
+                alert("Wrong points connected!");
+            }
         } else {
             data.clickedDot = col;
         }
