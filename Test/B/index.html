@@ -20,6 +20,60 @@
         border: 1px solid black;
     }
 
+    .arrowA {
+        position: absolute;
+        top: 150px;
+        left: -40px;
+        width: 200px;
+        height: 100px;
+        transform: rotate(90deg);
+        z-index: 0;
+    }
+
+    .arrowAaa {
+        position: absolute;
+        top: 65px;
+        left: 75px;
+        width: 50px;
+        height: 50px;
+        transform: rotate(65deg);
+        z-index: 0;
+
+    }
+
+    .arrowAab {
+        position: absolute;
+        top: 160px;
+        left: 75px;
+        width: 50px;
+        height: 50px;
+        transform: rotate(65deg);
+        z-index: 0;
+        display: none;
+    }
+
+    .arrowAa {
+        position: absolute;
+        top: 140px;
+        left: 120px;
+        width: 50px;
+        height: 50px;
+        transform: rotate(90deg);
+        z-index: 0;
+        display: none;
+    }
+
+    .arrowAb {
+        position: absolute;
+        top: 240px;
+        left: 120px;
+        width: 50px;
+        height: 50px;
+        transform: rotate(90deg);
+        z-index: 0;
+        display: none;
+    }
+
     .dot {
         position: absolute;
         width: 10px;
@@ -35,6 +89,8 @@
         transition: width 2s, height 2s;
         transform-origin: top left;
     }
+
+    
 
     /* Modified styles for semi-circles instead of straight lines */
     .half-circle {
@@ -60,6 +116,23 @@
         left: 150px; /* Adjusted for visual fit */
         transform: rotate(90deg);
     }
+
+    .endtext {
+        position: absolute;
+        top: 450px;
+        left: 60px;
+        font-size: 18px;
+        display: none;
+        
+    
+    }
+
+    .rules {
+        position: absolute;
+        top: 430px;
+        left: 120px;
+        font-size: 18px;
+    }
 </style>
 </head>
 <body>
@@ -76,11 +149,14 @@
            <!-- <div id="canvas">
         </div> -->
     </div>
-  <!-- <img class="arrowA" id="arr1" src="arrow1.png" alt="Overlay Image">
-    <img class="arrowAa" id="arr2" src="arrow1.png" alt="Overlay Image">
-    <img class="arrowAb" id="arr3" src="arrow1.png" alt="Overlay Image">
+   <img class="arrowA" id="arr1" src="arrow1.png" alt="Overlay Image">
+   <img class="arrowAaa" id="arr1a" src="arrow1.png" alt="Overlay Image">
+   <img class="arrowAab" id="arr3a" src="arrow1.png" alt="Overlay Image">
+    <img class="arrowAa" id="arr2" src="22.png" alt="Overlay Image">
+    <img class="arrowAb" id="arr2a" src="22.png" alt="Overlay Image">
+   
     <h1 class="rules" id="rules" >Click on vertices to draw</h1>
-    <h1 class="endtext" id="end" >Great youve learnt to draw the letter A</h1> -->
+    <h1 class="endtext" id="end" >Great youve learnt to draw the letter B</h1> 
 
     
 </div>
@@ -93,12 +169,29 @@ document.getElementById('dot3').addEventListener('click', function() {
     var dot4 = document.getElementById('dot4');
     var dot3 = document.getElementById('dot3');
     var canvas = document.getElementById('canvas');
+    var arr1 = document.getElementById('arr1');
+    var arr1a = document.getElementById('arr1a');
+    var arr2 = document.getElementById('arr2');
+    var arr3a = document.getElementById('arr3a');
+   // var arr2 = document.getElementById('arr2');
 
     if (currentLine === 1) {
-        drawLineAnimated(dot3, dot1, canvas); // Draw straight line between dot3 and dot1
+        drawLineAnimated(dot3, dot1, canvas);
+        arr1.style.display = 'none'; // Draw straight line between dot3 and dot1
+        arr1a.style.display = 'none';
+        setTimeout(function() {
+            arr2.style.display = 'block';
+            arr1a.style.display = 'block';
+        }, 3000); // Delay for 3000ms (3 second)
         currentLine++;
     } else if (currentLine === 2) {
         drawArcAnimated(dot3, dot4, canvas); // Draw semicircle between dot3 and dot4
+        arr2.style.display = 'none';
+        arr1a.style.display = 'none';
+        setTimeout(function() {
+            arr2a.style.display = 'block';
+            arr3a.style.display = 'block';
+        }, 3000);
         currentLine++;
     }
 });
@@ -110,6 +203,12 @@ document.getElementById('dot4').addEventListener('click', function() {
 
     if (currentLine === 3) {
         drawArcAnimated(dot4, dot1, canvas); // Draw horizontal straight line between dot4 and dot1
+        arr2a.style.display = 'none';
+        arr3a.style.display = 'none';
+        setTimeout(function() {
+            document.getElementById('end').style.display = 'block';
+            document.getElementById('rules').style.display = 'none';
+        }, 3000); // Delay for 1000ms (1 second)
         currentLine = 1; // Reset back to the first line
     }
 });
