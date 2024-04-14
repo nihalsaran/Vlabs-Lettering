@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Dots</title>
+    <style>
+        #canvas-container {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border: 1px solid black;
+        }
+
+        #canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 1px solid black;
+        }
+
+        .dot {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            /* Center the dots */
+        }
+
+        .line {
+            position: absolute;
+            border: 1px solid blue;
+            transition: width 2s, height 2s;
+            transform-origin: top left;
+        }
+
+        #stroke1 {
+            
+            display: none;
+            position: absolute;
+            top: 96px;
+            left: 95px;
+            width: 10px;
+            height: 209px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="canvas-container">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <div class="dot" id="dot3" style="top: 100px; left: 100px;"></div>
+        <div class="dot" id="dot4" style="top: 200px; left: 110px;"></div>
+        <div class="dot" id="dot1" style="top: 300px; left: 100px;"></div>
+        <img id="stroke1" src="stroke1.png" >
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const dot3 = document.getElementById('dot3');
+const dot1 = document.getElementById('dot1');
+
+let isDrawing = false;
+let startX = 0;
+let startY = 0;
+let tolerance = 30; // Increased radius for proximity check
+
+function drawToleranceCircle(dot, ctx) {
+    ctx.beginPath();
+    ctx.arc(dot.offsetLeft + 5, dot.offsetTop + 5, tolerance, 0, 2 * Math.PI);
+    ctx.strokeStyle = 'rgba(255, 200, 0, 0.5)'; // Light orange circle
+    ctx.stroke();
+}
+
+function startDrawing(e) {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Clear and draw tolerance circles
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawToleranceCircle(dot3, ctx);
+    drawToleranceCircle(dot1, ctx);
+
+    if (Math.hypot(x - (dot3.offsetLeft + 5), y - (dot3.offsetTop + 5)) <= tolerance) {
+        isDrawing = true;
+        startX = x;
+        startY = y;
+    }
+}
+
+function draw(e) {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    ctx.beginPath();
+    ctx.moveTo(startX, startY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    startX = x; 
+    startY = y;
+}
+
+function stopDrawing(e) {
+    if (!isDrawing) return;
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    console.log('Mouse up at:', x, y, 'Dot1 center at:', dot1.offsetLeft + 5, dot1.offsetTop + 5);
+
+    // Check if the ending point is near dot1
+    if (Math.hypot(x - (dot1.offsetLeft + 5), y - (dot1.offsetTop + 5)) <= tolerance) {
+        console.log('Stopped drawing near dot1');
+        
+      //  alert('Great, you\'ve connected dot3 to dot1!');
+        document.getElementById('stroke1').style.display = 'block'; // Make the image visible
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    } else {
+        console.log('Not near dot1');
+        alert('Complete the line. Try Again!');
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
+    }
+    isDrawing = false;
+}
+
+canvas.addEventListener('mousedown', startDrawing);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('mouseup', stopDrawing);
+
+    </script>
+</body>
+
+</html>

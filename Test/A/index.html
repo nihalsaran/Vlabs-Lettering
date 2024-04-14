@@ -22,16 +22,35 @@
 
     .arrowA {
         position: absolute;
-        top: 60px;
+        top: 160px;
         left: 7px;
         width: 200px;
         height: 80px;
         transform: rotate(120deg);
         z-index: 0;
     }
+    .arrowAaa {
+        position: absolute;
+        top: 50px;
+        left: 130px;
+        width: 80px;
+        height: 80px;
+        transform: rotate(20deg);
+        z-index: 0;
+    }
+    .arrowAab {
+        position: absolute;
+        top: 152px;
+        left: 80px;
+        width: 80px;
+        height: 80px;
+        transform: rotate(20deg);
+        z-index: 0;
+        display: none;
+    }
     .arrowAa {
         position: absolute;
-        top: 60px;
+        top: 160px;
         left: 190px;
         width: 200px;
         height: 80px;
@@ -41,7 +60,7 @@
 
     .arrowAb {
         position: absolute;
-        top: 110px;
+        top: 210px;
         left: 130px;
         width: 150px;
         height: 80px;
@@ -66,7 +85,7 @@
     }
     .endtext {
         position: absolute;
-        top: 250px;
+        top: 350px;
         left: 60px;
         font-size: 18px;
         display: none;
@@ -76,7 +95,7 @@
 
     .rules {
         position: absolute;
-        top: 230px;
+        top: 330px;
         left: 120px;
         font-size: 18px;
     }
@@ -87,16 +106,18 @@
 <body>
 <div id="canvas-container">
     <div id="canvas">
-        <div class="dot" id="dot1" style="top: 200px; left: 100px;"></div>
-        <div class="dot" id="dot2" style="top: 200px; left: 300px;"></div>
-        <div class="dot" id="dot3" style="top: 0px; left: 200px;"></div>
-        <div class="dot" id="dot4" style="top: 100px; left: 150px;"></div>
-        <div class="dot" id="dot5" style="top: 100px; left: 250px;"></div>
+        <div class="dot" id="dot1" style="top: 300px; left: 100px;"></div>
+        <div class="dot" id="dot2" style="top: 300px; left: 300px;"></div>
+        <div class="dot" id="dot3" style="top: 100px; left: 200px;"></div>
+        <div class="dot" id="dot4" style="top: 200px; left: 150px;"></div>
+        <div class="dot" id="dot5" style="top: 200px; left: 250px;"></div>
         <div class="line" id="line1" style="top: 100px; left: 150px; width: 0; height: 0;"></div>
         <div class="line" id="line2" style="top: 100px; left: 250px; width: 0; height: 0;"></div>
         <div class="line" id="line3" style="top: 100px; left: 150px; width: 0; height: 0;"></div>
     </div>
     <img class="arrowA" id="arr1" src="arrow1.png" alt="Overlay Image">
+    <img class="arrowAaa" id="arr1aa" src="arrow1.png" alt="Overlay Image">
+    <img class="arrowAab" id="arr1ab" src="arrow1.png" alt="Overlay Image">
     <img class="arrowAa" id="arr2" src="arrow1.png" alt="Overlay Image">
     <img class="arrowAb" id="arr3" src="arrow1.png" alt="Overlay Image">
     <h1 class="rules" id="rules" >Click on vertices to draw</h1>
@@ -114,21 +135,27 @@ document.getElementById('dot3').addEventListener('click', function() {
     var line2 = document.getElementById('line2');
     var line3 = document.getElementById('line3');
     var arr1 = document.getElementById('arr1');
+    var arr1aa = document.getElementById('arr1aa');
+    var arr1ab = document.getElementById('arr1ab');
     var arr2 = document.getElementById('arr2');
     var end = document.getElementById('end');
 
     if (currentLine === 1) {
         drawLine(dot3, dot1, line1); // Draw left diagonal
         arr1.style.display = 'none';
+        arr1aa.style.display = 'none';
         setTimeout(function() {
             arr2.style.display = 'block';
+            arr1aa.style.display = 'block';
         }, 3000); // Delay for 3000ms (3 second)
         currentLine++;
     } else if (currentLine === 2) {
         drawLine(dot3, dot2, line2); // Draw right diagonal
         arr2.style.display = 'none';
+        arr1aa.style.display = 'none';
         setTimeout(function() {
             document.getElementById('arr3').style.display = 'block';
+            arr1ab.style.display = 'block';
         }, 3000); // Delay for 3000ms (3 second)
         currentLine++;
     }
@@ -141,13 +168,16 @@ document.getElementById('dot4').addEventListener('click', function() {
     var arr2 = document.getElementById('arr2');
     var arr3 = document.getElementById('arr3');
     var end = document.getElementById('end');
+    var arr1ab = document.getElementById('arr1ab');
 
     if (currentLine === 3) {
         drawLine(dot4, dot5, line3); // Draw horizontal line
         arr2.style.display = 'none';
         setTimeout(function() {
             arr3.style.display = 'none';
+            arr1ab.style.display = 'none';
             end.style.display = 'block';
+            rules.style.display = 'none';
         }, 3000); // Delay for 1000ms (1 second)
         currentLine = 1; // Reset back to the first line
     }
