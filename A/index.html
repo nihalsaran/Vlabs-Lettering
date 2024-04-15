@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connect Dots</title>
+    <title>Letter A</title>
     <style>
          body {
             display: flex;
@@ -43,29 +43,29 @@
         
 
         #stroke1 {
-           display: none;
+            display: none;
             position: absolute;
-            top: 62px;
-            left: 144px;
+            top: 66px;
+            left: 140px;
             width: 10px;
-            height: 235px;
-            transform: rotate(208deg);
+            height: 280px;
+            transform: rotate(204deg);
         }
 
         #stroke2 {
             display: none;
             position: absolute;
-            top: 62px;
-            left: 250px;
+            top: 66px;
+            left: 252px;
             width: 10px;
-            height: 235px;
-            transform: rotate(152deg);
+            height: 280px;
+            transform: rotate(156deg);
         }
 
         #stroke3 {
             display: none;
             position: absolute;
-            top: 131px;
+            top: 170px;
             left: 197px;
             width: 10px;
             height: 130px;
@@ -73,10 +73,47 @@
         }
 
         #sbox {
-            top: 101px;
-            left: 100px;
+            position: relative;
+            left: 155px;
             width: 400px;
             height: 400px;
+            z-index: -2;
+        }
+
+        .arrrow1 {
+            position: absolute;
+            top: 60px;
+            left: 80px;
+            width: 40px;
+            height: 280px;
+            transform: rotate(207deg);
+            z-index: 0;
+        }
+        .arrrow2 {
+            position: absolute;
+            top: 60px;
+            left: 280px;
+            width: 40px;
+            height: 280px;
+            transform: rotate(153deg);
+            z-index: 0;
+        }
+        .arrrow3 {
+            position: absolute;
+            top: 200px;
+            left: 190px;
+            width: 30px;
+            height: 130px;
+            transform: rotate(90deg);
+            z-index: 0;
+        }
+
+        #trace {
+            position: relative;
+           right: 200px;
+            width: 350px;
+            height: 350px;
+            z-index: -1;
         }
     </style>
 </head>
@@ -84,15 +121,21 @@
 <body>
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 80px; left: 201px;"></div>
-        <div class="dot" id="dot4" style="top: 196px; left: 140px;"></div>
-        <div class="dot" id="dot1" style="top: 276px; left: 98px;"></div>
-        <div class="dot" id="dot2" style="top: 276px; left: 305px;"></div>
-        <div class="dot" id="dot5" style="top: 196px; left: 264px;"></div>
+        <div class="dot" id="dot3" style="top: 80px; left: 201px;"></div>  <!-- dot1 -->
+        <div class="dot" id="dot4" style="top: 234px; left: 133px;"></div>  <!-- dot2 -->
+        <div class="dot" id="dot1" style="top: 333px; left: 89px;"></div>   <!-- dot3 -->
+        <div class="dot" id="dot2" style="top: 333px; left: 313px;"></div>  <!-- dot5 -->
+        <div class="dot" id="dot5" style="top: 234px; left: 270px;"></div> <!-- dot4 -->
         <img id="sbox" src="sboxx.png" >
+        <img id="trace" src="A.png" >
+     <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image"> 
+      <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image"> 
+       <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image"> 
+      
         <img id="stroke1" src="stroke1.png" >
         <img id="stroke2" src="stroke1.png" >
         <img id="stroke3" src="stroke1.png" >
+        
     </div>
     
     <script>
@@ -103,12 +146,20 @@
         const dot2 = document.getElementById('dot2');
         const dot4 = document.getElementById('dot4');
         const dot5 = document.getElementById('dot5');
+        const arrow1 = document.getElementById('arrow1');
+        const arrow2 = document.getElementById('arrow2');
+        const arrow3 = document.getElementById('arrow3');
     
         let isDrawing = false;
         let startX = 0;
         let startY = 0;
         let tolerance = 30; // Tolerance radius for dot connection
         let nextConnection = 'dot3-dot1'; // Start with connecting dot3 to dot1
+
+        arrow1.style.display = 'block'; // Initially, arrow1 is visible
+    arrow2.style.display = 'none';
+    arrow3.style.display = 'none';
+
     
         function checkDotTolerance(dot, x, y) {
             return Math.hypot(x - (dot.offsetLeft + 5), y - (dot.offsetTop + 5)) <= tolerance;
@@ -192,19 +243,25 @@
                     case 'dot3-dot1':
                         strokeId = '1';
                         nextConnection = 'dot3-dot2'; // Set next connection to dot3-dot2
+                        arrow1.style.display = 'none';
+                    arrow2.style.display = 'block';
                         break;
                     case 'dot3-dot2':
                         strokeId = '2';
                         nextConnection = 'dot4-dot5'; // Set next connection to dot4-dot5
+                        arrow2.style.display = 'none';
+                    arrow3.style.display = 'block';
                         break;
                     case 'dot4-dot5':
                         strokeId = '3';
                         nextConnection = 'dot3-dot1'; // Optionally loop back or end the sequence
+                        arrow3.style.display = 'none';
                         break;
                 }
     
                 if (strokeId) {
                     document.getElementById('stroke' + strokeId).style.display = 'block';
+                    
                 }
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
             } else {
