@@ -46,9 +46,9 @@
             display: none;
             position: absolute;
             top: 75px;
-            left: 127px;
-            width: 10px;
-            height: 242px;
+            left: 140px;
+            width: 15px;
+            height: 245px;
             
 
         }
@@ -57,10 +57,10 @@
             
             display: none;
             position: absolute;
-            top: 72px;
-            left: 130px;
-            width: 110px;
-            height: 132px;
+            top: 70px;
+            left: 140px;
+            width: 170px;
+            height: 125px;
 
         }
 
@@ -68,28 +68,74 @@
             
             display: none;
             position: absolute;
-            top: 192px;
-            left: 130px;
-            width: 110px;
+            top: 187px;
+            left: 140px;
+            width: 170px;
             height: 132px;
 
         }
         #sbox {
-            top: 101px;
-            left: 100px;
+            position: relative;
+            left: 130px;
             width: 400px;
             height: 400px;
+            z-index: -2;
+        }
+
+        #trace {
+            position: relative;
+            top: -01px;
+           right: 185px;
+            width: 300px;
+            height: 308px;
+            z-index: -1;
+        }
+
+        .arrrow1 {
+            
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            width: 40px;
+            height: 240px;
+            transform: rotate(180deg);
+            z-index: 0;
+        }
+        .arrrow2 {
+            display: none;
+            position: absolute;
+            top: 80px;
+            left: 300px;
+            width: 20px;
+            height: 110px;
+            transform: rotate(180deg);
+            z-index: 0;
+        }
+        .arrrow3 {
+            display: none;
+            position: absolute;
+            top: 200px;
+            left: 310px;
+            width: 20px;
+            height: 110px;
+            transform: rotate(180deg);
+            z-index: 0;
         }
     </style>
 </head>
 
 <body>
+    
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 80px; left: 132px;"></div>
-        <div class="dot" id="dot4" style="top: 197px; left: 132px;"></div>
-        <div class="dot" id="dot1" style="top: 315px; left: 132px;"></div>
+        <div class="dot" id="dot3" style="top: 80px; left: 145px;"></div>
+        <div class="dot" id="dot4" style="top: 190px; left: 145px;"></div>
+        <div class="dot" id="dot1" style="top: 315px; left: 145px;"></div>
         <img id="sbox" src="sboxx.png" >
+        <img id="trace" src="B.png" >
+        <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image"> 
+      <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image"> 
+       <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image"> 
         <img id="stroke1" src="stroke1.png" >
         <img id="stroke2" src="stroke2.png" >
         <img id="stroke3" src="stroke2.png" >
@@ -101,6 +147,9 @@ const ctx = canvas.getContext('2d');
 const dot3 = document.getElementById('dot3');
 const dot1 = document.getElementById('dot1');
 const dot4 = document.getElementById('dot4');
+const arrow1 = document.getElementById('arrow1');
+        const arrow2 = document.getElementById('arrow2');
+        const arrow3 = document.getElementById('arrow3');
 
 let isDrawing = false;
 let startX = 0;
@@ -147,7 +196,7 @@ function draw(e) {
     startX = x;
     startY = y;
     ctx.strokeStyle = 'black'; // Change line color to black
-    ctx.lineWidth = 2;  
+    ctx.lineWidth = 6;  
 }
 
 function stopDrawing(e) {
@@ -158,14 +207,22 @@ function stopDrawing(e) {
     const targetDot = nextConnection.includes('dot1') ? dot1 : dot4;
 
     if (Math.hypot(x - (targetDot.offsetLeft + 5), y - (targetDot.offsetTop + 5)) <= tolerance) {
-        document.getElementById('stroke' + (nextConnection === 'dot3-dot1' ? '1' : nextConnection === 'dot3-dot4' ? '2' : '3')).style.display = 'block';
+        const strokeNum = nextConnection === 'dot3-dot1' ? '1' : (nextConnection === 'dot3-dot4' ? '2' : '3');
+        document.getElementById('stroke' + strokeNum).style.display = 'block';
         console.log('Stopped drawing near', targetDot.id);
+
+        // Toggle arrows visibility
         if (nextConnection === 'dot3-dot1') {
+            document.getElementById('arrow1').style.display = 'none';
+            document.getElementById('arrow2').style.display = 'block';
             nextConnection = 'dot3-dot4';
         } else if (nextConnection === 'dot3-dot4') {
+            document.getElementById('arrow2').style.display = 'none';
+            document.getElementById('arrow3').style.display = 'block';
             nextConnection = 'dot4-dot1';
-        } else {
-            nextConnection = ''; // Reset or set to next expected connection
+        } else if (nextConnection === 'dot4-dot1') {
+            document.getElementById('arrow3').style.display = 'none';
+            nextConnection = ''; // All connections done
         }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
     } else {
