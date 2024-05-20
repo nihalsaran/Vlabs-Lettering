@@ -49,10 +49,11 @@
 
             display: none;
             position: absolute;
-            top: 78px;
-            left: 92px;
+            transform: rotate(138deg);
+            top: 62px;
+            left: 140px;
             width: 15px;
-            height: 245px;
+            height: 140px;
 
 
         }
@@ -60,11 +61,11 @@
         #stroke2 {
             display: none;
             position: absolute;
-            top: 52px;
-            left: 180px;
+            top: 62px;
+            left: 229px;
             width: 15px;
-            height: 295px;
-            transform: rotate(145deg);
+            height: 130px;
+            transform: rotate(222deg);
             z-index: -1;
 
         }
@@ -73,11 +74,12 @@
 
             display: none;
             position: absolute;
-            top: 75px;
-            left: 267px;
+            top: 175px;
+            left: 183px;
             width: 15px;
-            height: 250px;
+            height: 150px;
             transform: rotate(180deg);
+            z-index: -1;
 
         }
 
@@ -95,7 +97,7 @@
             top: -01px;
             right: 210px;
             width: 300px;
-            height: 260px;
+            height: 245px;
             z-index: -2;
         }
 
@@ -103,19 +105,19 @@
 
             position: absolute;
             top: 80px;
-            left: 30px;
-            width: 40px;
-            height: 240px;
-            transform: rotate(180deg);
+            left: 90px;
+            width: 30px;
+            height: 140px;
+            transform: rotate(138deg);
             z-index: 0;
         }
 
         .arrrow2 {
 
-            top: 100px;
-            left: 190px;
+            top: 80px;
+            left: 260px;
             position: absolute;
-            transform: rotate(145deg);
+            transform: rotate(222deg);
             z-index: 0;
             width: 30px;
             height: 130px;
@@ -127,10 +129,10 @@
             position: absolute;
             transform: rotate(180deg);
             z-index: 0;
-            top: 100px;
-            left: 300px;
-            width: 20px;
-            height: 190px;
+            top: 180px;
+            left: 220px;
+            width: 30px;
+            height: 150px;
         }
     </style>
 </head>
@@ -141,12 +143,12 @@
         <canvas id="canvas" width="400" height="400"></canvas>
         <div class="dot" id="dot3" style="top: 83px; left: 105px;"></div> <!-- first line top dot-->
         <!--    <div class="dot" id="dot4" style="top: 200px; left: 190px;"></div> -->
-        <div class="dot" id="dot1" style="top: 319px; left: 105px;"></div> <!-- first line bottom dot-->
+        <div class="dot" id="dot1" style="top: 182px; left: 190px;"></div> <!-- middle dot-->
         <div class="dot" id="dot6" style="top: 82.5px; left: 275px;"></div> <!-- last line top dot-->
         <!--  <div class="dot" id="dot5" style="top: 310px; left: 202px;"></div> -->
-        <div class="dot" id="dot2" style="top: 319px; left: 275px;"></div> <!-- last line bottom dot-->
+        <div class="dot" id="dot2" style="top: 319px; left: 190px;"></div> <!-- bottom dot-->
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="N.png">
+        <img id="trace" src="Y.png">
         <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image">
         <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image">
         <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image">
@@ -196,11 +198,13 @@ function startDrawing(e) {
 
     switch (nextConnection) {
         case 'dot3-dot1':
-        case 'dot3-dot2':
             targetDot = dot3;
             break;
-        case 'dot6-dot2': // Changed from 'dot2-dot6' to 'dot6-dot2'
-            targetDot = dot6; // Changed from dot6 to dot2
+        case 'dot6-dot1':
+            targetDot = dot6;
+            break;
+        case 'dot1-dot2':
+            targetDot = dot1;
             break;
     }
 
@@ -211,7 +215,7 @@ function startDrawing(e) {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     drawToleranceCircle(targetDot, ctx);
-    drawToleranceCircle(nextConnection.includes('dot3') ? dot3 : dot2, ctx);
+    drawToleranceCircle(nextConnection.includes('dot1') ? dot1 : dot2, ctx);
 
     isDrawing = true;
     startX = targetDot.offsetLeft + 5;
@@ -244,11 +248,11 @@ function stopDrawing(e) {
         case 'dot3-dot1':
             targetDot = dot1;
             break;
-        case 'dot3-dot2':
-            targetDot = dot2;
+        case 'dot6-dot1':
+            targetDot = dot1;
             break;
-        case 'dot6-dot2': // Changed from 'dot2-dot6' to 'dot6-dot2'
-            targetDot = dot2; // Changed from dot6 to dot2
+        case 'dot1-dot2':
+            targetDot = dot2;
             break;
     }
 
@@ -258,19 +262,21 @@ function stopDrawing(e) {
         switch (nextConnection) {
             case 'dot3-dot1':
                 strokeId = '1';
-                nextConnection = 'dot3-dot2';
+                nextConnection = 'dot6-dot1';
                 arrow1.style.display = 'none';
                 arrow2.style.display = 'block';
                 break;
-            case 'dot3-dot2':
+            case 'dot6-dot1':
                 strokeId = '2';
-                nextConnection = 'dot6-dot2'; // Changed from 'dot2-dot6' to 'dot6-dot2'
+                nextConnection = 'dot1-dot2';
                 arrow2.style.display = 'none';
                 arrow3.style.display = 'block';
+                dot6.style.display = 'none';
                 break;
-            case 'dot6-dot2': // Changed from 'dot2-dot6' to 'dot6-dot2'
+            case 'dot1-dot2':
                 strokeId = '3';
                 arrow3.style.display = 'none';
+                dot2.style.display = 'none';
                 // Optionally loop back or end the sequence
                 // In this case, you may want to reset the connections, e.g., nextConnection = 'dot3-dot1';
                 break;
@@ -290,6 +296,7 @@ function stopDrawing(e) {
 canvas.addEventListener('mousedown', startDrawing);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseup', stopDrawing);
+
 
 
 
