@@ -295,44 +295,4 @@
                 console.log('Stopped drawing near', targetDot.id);
                 let strokeId;
                 switch (nextConnection) {
-                    case 'dot3-dot5':
-                        strokeId = '1';
-                        nextConnection = 'dot4-dot1';
-                        arrow1.style.display = 'none';
-                        arrow2.style.display = 'block';
-                        dot3.style.display = 'none';
-                        dot5.style.display = 'none';
-                        dot4.style.display = 'block';
-                        dot1.style.display = 'block';
-                        break;
-                    case 'dot4-dot1':
-                        strokeId = '2';
-                        arrow2.style.display = 'none';
-                        dot4.style.display = 'none';
-                        dot1.style.display = 'none';
-                        // Optionally loop back or end the sequence
-                        // In this case, you may want to reset the connections, e.g., nextConnection = 'dot3-dot5';
-                        break;
-                }
-
-                if (strokeId) {
-                    document.getElementById('stroke' + strokeId).style.display = 'block';
-                }
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            } else {
-                alert('Complete the line near the correct dot. Try Again!');
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            isDrawing = false;
-        }
-
-        canvas.addEventListener('mousedown', startDrawing);
-        canvas.addEventListener('mousemove', draw);
-        canvas.addEventListener('mouseup', stopDrawing);
-
-
-
-    </script>
-</body>
-
-</html>
+                    case 
