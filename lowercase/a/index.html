@@ -168,7 +168,7 @@
         let nextConnection = 'dot3-dot1'; // Start with connecting dot3 to dot1
 
         arrow1.style.display = 'block'; // Initially, arrow1 is visible
-        arrow2.style.display = 'block';
+        arrow2.style.display = 'none';
 
         function checkDotTolerance(dot, x, y) {
             return Math.hypot(x - (dot.offsetLeft + 5), y - (dot.offsetTop + 5)) <= tolerance;
