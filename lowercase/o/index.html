@@ -73,12 +73,12 @@
 
         #stroke2 {
 
-            display: none;
+           display: none;
             position: absolute;
-            top: 70px;
-            left: 120px;
-            width: 187px;
-            height: 190px;
+            top: 97px;
+            left: 96px;
+            width: 227px;
+            height: 232px;
 
         }
 
@@ -97,7 +97,7 @@
 
         #sbox {
             position: relative;
-            left: 100px;
+            left: 120px;
             width: 400px;
             height: 400px;
             z-index: -2;
@@ -107,8 +107,8 @@
             position: relative;
             top: 12px;
             right: 192px;
-            width: 300px;
-            height: 290px;
+            width: 230px;
+            height: 230px;
             z-index: -1;
         }
 
@@ -126,7 +126,7 @@
         .arrrow2 {
             display: none;
             position: absolute;
-            top: 115px;
+            top: 155px;
             left: 220px;
             width: 50px;
             height: 100px;
@@ -151,15 +151,15 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 80px; left: 125px;"></div>
-        <div class="dot4" id="dot4" style="top: 150px; left: 125px;"></div>
-        <div class="dot" id="dot1" style="top: 350px; left: 125px;"></div>
-        <div class="dot4" id="dot2" style="top: 195px; left: 125px;"></div>
+        <!-- <div class="dot" id="dot3" style="top: 80px; left: 125px;"></div> -->
+        <div class="dot" id="dot4" style="top: 115px; left: 245px;"></div>
+        <!-- <div class="dot" id="dot1" style="top: 350px; left: 125px;"></div> -->
+        <div class="dot" id="dot2" style="top: 115px; left: 175px;"></div>
 
 
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="P.png">
-        <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image">
+        <img id="trace" src="o.png">
+        <!-- <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image"> -->
         <img class="arrrow2" id="arrow2" src="curved arrow.gif" alt="Overlay Image">
         <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image">
         <img id="stroke1" src="stroke1.png">
@@ -170,22 +170,18 @@
     <script>
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-        const dot1 = document.getElementById('dot1');
         const dot2 = document.getElementById('dot2');
-        const dot3 = document.getElementById('dot3');
-        const dot4 = document.getElementById('dot4'); // Added reference to dot4
+        const dot4 = document.getElementById('dot4'); // Now focus on dot4-dot2
 
-        const arrow1 = document.getElementById('arrow1');
         const arrow2 = document.getElementById('arrow2');
 
         let isDrawing = false;
         let startX = 0;
         let startY = 0;
         let tolerance = 30;
-        let nextConnection = 'dot3-dot1'; // Start with connecting dot3 to dot1
+        let nextConnection = 'dot4-dot2'; // Start with connecting dot4 to dot2
 
-        arrow1.style.display = 'block'; // Initially, arrow1 is visible
-        arrow2.style.display = 'none';
+        arrow2.style.display = 'block'; // Initially, arrow2 is visible
 
         function checkDotTolerance(dot, x, y) {
             return Math.hypot(x - (dot.offsetLeft + 5), y - (dot.offsetTop + 5)) <= tolerance;
@@ -202,16 +198,7 @@
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            let targetDot;
-
-            switch (nextConnection) {
-                case 'dot3-dot1':
-                    targetDot = dot3;
-                    break;
-                case 'dot4-dot2': // Changed from dot3-dot2 to dot4-dot2
-                    targetDot = dot4;
-                    break;
-            }
+            let targetDot = dot4; // Always target dot4
 
             if (!checkDotTolerance(targetDot, x, y)) {
                 alert('Please follow rules and draw accordingly. Try again!');
@@ -220,7 +207,7 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             drawToleranceCircle(targetDot, ctx);
-            drawToleranceCircle(nextConnection.includes('dot3') ? dot3 : targetDot, ctx);
+            drawToleranceCircle(dot4, ctx);
 
             isDrawing = true;
             startX = targetDot.offsetLeft + 5;
@@ -247,40 +234,14 @@
             const rect = canvas.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-            let targetDot;
-
-            switch (nextConnection) {
-                case 'dot3-dot1':
-                    targetDot = dot1;
-                    break;
-                case 'dot4-dot2': // Update here to dot4-dot2
-                    targetDot = dot2;
-                    break;
-            }
+            let targetDot = dot2; // Now only checking for dot2
 
             if (checkDotTolerance(targetDot, x, y)) {
                 console.log('Stopped drawing near', targetDot.id);
-                let strokeId;
-                switch (nextConnection) {
-                    case 'dot3-dot1':
-                        strokeId = '1';
-                        nextConnection = 'dot4-dot2'; // Change the next connection to dot4-dot2
-                        arrow1.style.display = 'none';
-                        arrow2.style.display = 'block';
-                        dot3.style.display = 'none'; // Hide dot3
-                        dot4.style.display = 'block'; // Show dot4
-                        dot4.style.zIndex = 10;
-                        dot1.style.display = 'none';
-                        dot2.style.display = 'block';// Show dot2
-                        dot2.style.zIndex = 10;
-                        break;
-                    case 'dot4-dot2': // Handle the new connection case
-                        strokeId = '2';
-                        arrow2.style.display = 'none';
-                        dot4.style.display = 'none';
-                        dot2.style.display = 'none';
-                        break;
-                }
+                let strokeId = '2'; // We are now only handling stroke 2
+                arrow2.style.display = 'none';
+                dot4.style.display = 'none';
+                dot2.style.display = 'none';
 
                 if (strokeId) {
                     document.getElementById('stroke' + strokeId).style.display = 'block';
@@ -296,7 +257,6 @@
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
-
 
 
     </script>
