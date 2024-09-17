@@ -45,6 +45,17 @@
             transform: translate(-50%, -50%);
         }
 
+        .dot4 {
+
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+        }
+
 
 
 
@@ -53,8 +64,8 @@
             display: none;
             position: absolute;
             top: 70px;
-            left: 116px;
-            width: 15px;
+            left: 121px;
+            width: 10px;
             height: 285px;
 
 
@@ -66,8 +77,8 @@
             position: absolute;
             top: 70px;
             left: 120px;
-            width: 175px;
-            height: 136px;
+            width: 187px;
+            height: 190px;
 
         }
 
@@ -86,7 +97,7 @@
 
         #sbox {
             position: relative;
-            left: 85px;
+            left: 100px;
             width: 400px;
             height: 400px;
             z-index: -2;
@@ -115,8 +126,8 @@
         .arrrow2 {
             display: none;
             position: absolute;
-            top: 90px;
-            left: 205px;
+            top: 115px;
+            left: 220px;
             width: 50px;
             height: 100px;
             transform: rotate(10deg);
@@ -140,9 +151,10 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 80px; left: 155px;"></div>
+        <div class="dot" id="dot3" style="top: 80px; left: 125px;"></div>
+        <div class="dot4" id="dot4" style="top: 150px; left: 125px;"></div>
         <div class="dot" id="dot1" style="top: 350px; left: 125px;"></div>
-        <div class="dot" id="dot2" style="top: 195px; left: 125px;"></div>
+        <div class="dot4" id="dot2" style="top: 195px; left: 125px;"></div>
 
 
         <img id="sbox" src="sboxx.png">
@@ -151,7 +163,7 @@
         <img class="arrrow2" id="arrow2" src="curved arrow.gif" alt="Overlay Image">
         <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image">
         <img id="stroke1" src="stroke1.png">
-        <img id="stroke2" src="stroke2.png">
+        <img id="stroke2" src="p-stroke.png">
         <img id="stroke3" src="stroke1.png">
     </div>
 
@@ -161,6 +173,7 @@
         const dot1 = document.getElementById('dot1');
         const dot2 = document.getElementById('dot2');
         const dot3 = document.getElementById('dot3');
+        const dot4 = document.getElementById('dot4'); // Added reference to dot4
 
         const arrow1 = document.getElementById('arrow1');
         const arrow2 = document.getElementById('arrow2');
@@ -172,7 +185,7 @@
         let nextConnection = 'dot3-dot1'; // Start with connecting dot3 to dot1
 
         arrow1.style.display = 'block'; // Initially, arrow1 is visible
-        arrow2.style.display = 'none';
+        arrow2.style.display = 'block';
 
         function checkDotTolerance(dot, x, y) {
             return Math.hypot(x - (dot.offsetLeft + 5), y - (dot.offsetTop + 5)) <= tolerance;
@@ -195,8 +208,8 @@
                 case 'dot3-dot1':
                     targetDot = dot3;
                     break;
-                case 'dot3-dot2':
-                    targetDot = dot3;
+                case 'dot4-dot2': // Changed from dot3-dot2 to dot4-dot2
+                    targetDot = dot4;
                     break;
             }
 
@@ -240,7 +253,7 @@
                 case 'dot3-dot1':
                     targetDot = dot1;
                     break;
-                case 'dot3-dot2':
+                case 'dot4-dot2': // Update here to dot4-dot2
                     targetDot = dot2;
                     break;
             }
@@ -251,17 +264,20 @@
                 switch (nextConnection) {
                     case 'dot3-dot1':
                         strokeId = '1';
-                        nextConnection = 'dot3-dot2';
+                        nextConnection = 'dot4-dot2'; // Change the next connection to dot4-dot2
                         arrow1.style.display = 'none';
                         arrow2.style.display = 'block';
-                        dot3.style.display = 'block';
+                        dot3.style.display = 'none'; // Hide dot3
+                        dot4.style.display = 'block'; // Show dot4
+                        dot4.style.zIndex = 10;
                         dot1.style.display = 'none';
-                        dot2.style.display = 'block';
+                        dot2.style.display = 'block';// Show dot2
+                        dot2.style.zIndex = 10;
                         break;
-                    case 'dot3-dot2':
+                    case 'dot4-dot2': // Handle the new connection case
                         strokeId = '2';
                         arrow2.style.display = 'none';
-                        dot3.style.display = 'none';
+                        dot4.style.display = 'none';
                         dot2.style.display = 'none';
                         break;
                 }
@@ -280,6 +296,7 @@
         canvas.addEventListener('mousedown', startDrawing);
         canvas.addEventListener('mousemove', draw);
         canvas.addEventListener('mouseup', stopDrawing);
+
 
 
     </script>
