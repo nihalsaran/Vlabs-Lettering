@@ -33,6 +33,7 @@
             top: 0;
             left: 0;
             border: 1px solid black;
+            z-index: 10;
         }
 
         .dot {
@@ -49,10 +50,10 @@
 
             display: none;
             position: absolute;
-            top: 82px;
-            left: 79px;
-            width: 230px;
-            height: 230px;
+            top: 85px;
+            left: 85px;
+            width: 198px;
+            height: 235px;
             z-index: -1;
 
 
@@ -62,10 +63,10 @@
 
             display: none;
             position: absolute;
-            top: 85px;
-            left: 285px;
-            width: 20px;
-            height: 230px;
+            top: 90px;
+            left: 265px;
+            width: 15px;
+            height: 220px;
             transform: rotate(180deg);
 
         }
@@ -87,16 +88,16 @@
             width: 400px;
             height: 400px;
             z-index: -2;
+            display: none;
         }
 
         #trace {
             position: relative;
-
-            top: -01px;
-            right: 200px;
-            width: 240px;
-            height: 250px;
-            z-index: -1;
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
@@ -138,11 +139,11 @@
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
         <div class="dot" id="dot3" style="top: 228px; left: 100px;"></div>
-        <div class="dot" id="dot4" style="top: 308px; left: 295px;"></div>
+        <div class="dot" id="dot4" style="top: 308px; left: 270px;"></div>
         <div class="dot" id="dot1" style="top: 170px; left: 98px;"></div>
-        <div class="dot" id="dot2" style="top: 95px; left: 295px;"></div>
-        <img id="sbox" src="sboxx.png">
-        <img id="trace" src="a.png">
+        <div class="dot" id="dot2" style="top: 95px; left: 270px;"></div>
+        <!-- <img id="sbox" src="sboxx.png"> -->
+        <img id="trace" src="a-new.png">
         <img class="arrrow1" id="arrow1" src="curved arrow.gif" alt="Overlay Image">
         <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image">
         <!--      <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image"> -->
