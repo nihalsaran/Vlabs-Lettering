@@ -49,10 +49,10 @@
 
             display: none;
             position: absolute;
-            top: 74px;
-            left: 174px;
-            width: 112px;
-            height: 283px;
+            top: 0px;
+            left: 145px;
+            width: 132px;
+            height: 320px;
             z-index: -1;
             
 
@@ -63,10 +63,10 @@
 
             display: none;
             position: absolute;
-            top: 110px;
-            left: 182px;
+            top: 33px;
+            left: 162px;
             width: 10px;
-            height: 110px;
+            height: 150px;
             transform: rotate(90deg);
 
         }
@@ -84,26 +84,27 @@
 
         #sbox {
             position: relative;
-            left: 90px;
+            left: 115px;
             width: 400px;
             height: 400px;
             z-index: -2;
+            display: none;
         }
 
         #trace {
             position: relative;
-            top: 10px;
-            right: 190px;
-            width: 290px;
-            height: 290px;
-            z-index: -1;
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
 
             position: absolute;
-            top: 75px;
-            left: 200px;
+            top: 05px;
+            left: 190px;
             width: 50px;
             height: 90px;
             transform: scalex(-1)rotate(300deg);
@@ -114,8 +115,8 @@
         .arrrow2 {
             
             position: absolute;
-            top: 140px;
-            left: 180px;
+            top: 100px;
+            left: 140px;
             width: 20px;
             height: 100px;
             transform: rotate(90deg);
@@ -139,12 +140,12 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 165px; left: 135px;"></div>
-        <div class="dot" id="dot2" style="top: 105px; left: 282px;"></div>
-        <div class="dot" id="dot1" style="top: 165px; left: 240px;"></div>
-        <div class="dot" id="dot4" style="top: 350px; left: 180px;"></div>
+        <div class="dot" id="dot3" style="top: 108px; left: 100px;"></div>
+        <div class="dot" id="dot2" style="top: 27px; left: 270px;"></div>
+        <div class="dot" id="dot1" style="top: 110px; left: 235px;"></div>
+        <div class="dot" id="dot4" style="top: 310px; left: 150px;"></div>
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="f.png">
+        <img id="trace" src="f-new.png">
         <img class="arrrow1" id="arrow1" src="curved arrow.gif" alt="Overlay Image">
           <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image"> 
       <!-- <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image"> -->
@@ -260,7 +261,7 @@
                     case 'dot3-dot1':
                         strokeId = '2';
                         nextConnection = 'dot2-dot4'; // Optionally loop back to the start
-                        arrow1.style.display = 'none';
+                        arrow2.style.display = 'none';
                         dot1.style.display = 'none';
                         dot3.style.display = 'none';
                         break;
