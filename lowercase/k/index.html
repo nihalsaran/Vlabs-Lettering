@@ -29,6 +29,7 @@
             top: 0;
             left: 0;
             border: 1px solid black;
+            z-index: 10;
         }
 
         .dot {
@@ -47,10 +48,10 @@
             
             display: none;
             position: absolute;
-            top: 78px;
-            left: 130px;
+            top: 08px;
+            left: 90px;
             width: 15px;
-            height: 245px;
+            height: 305px;
             
 
         }
@@ -59,10 +60,10 @@
             
             display: none;
             position: absolute;
-            top: 120px;
-            left: 190px;
+            top: 50px;
+            left: 170px;
             width: 15px;
-            height: 150px;
+            height: 210px;
             transform: rotate(54deg);
 
         }
@@ -71,10 +72,10 @@
             
             display: none;
             position: absolute;
-            top: 175px;
-            left: 230px;
+            top: 155px;
+            left: 200px;
             width: 15px;
-            height: 163px;
+            height: 183px;
             transform: rotate(137deg);
 
         }
@@ -92,27 +93,27 @@
         }
         #sbox {
             position: relative;
-            left: 90px;
+            left: 115px;
             width: 400px;
             height: 400px;
             z-index: -2;
-            top: 5px;
+            display: none;
         }
 
         #trace {
             position: relative;
-            top: -01px;
-           right: 185px;
-            width: 300px;
-            height: 250px;
-            z-index: -1;
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
             
             position: absolute;
             top: 80px;
-            left: 80px;
+            left: 30px;
             width: 40px;
             height: 240px;
             transform: rotate(180deg);
@@ -123,7 +124,7 @@
             top: 50px;
             left: 170px;
             position: absolute;
-            transform: rotate(40deg);
+            transform: rotate(55deg);
             z-index: 0;
             width: 30px;
             height: 110px;
@@ -132,7 +133,7 @@
         .arrrow3 {
             
             position: absolute;
-            transform: rotate(140deg);
+            transform: rotate(135deg);
             z-index: 0;
             top: 140px;
             left: 250px;
@@ -157,14 +158,14 @@
     
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 83px; left: 140px;"></div>
-        <div class="dot" id="dot4" style="top: 154px; left: 253px;"></div>
-        <div class="dot" id="dot1" style="top: 319px; left: 140px;"></div>
-        <div class="dot" id="dot2" style="top: 235px; left: 140px;"></div>
-        <div class="dot" id="dot5" style="top: 202px; left: 185px;"></div>
-        <div class="dot" id="dot6" style="top: 317px; left: 295px;"></div>
+        <div class="dot" id="dot3" style="top: 10px; left: 97px;"></div>
+        <div class="dot" id="dot4" style="top: 95px; left: 263px;"></div>
+        <div class="dot" id="dot1" style="top: 311px; left: 97px;"></div>
+        <div class="dot" id="dot2" style="top: 217px; left: 97px;"></div>
+        <div class="dot" id="dot5" style="top: 185px; left: 145px;"></div>
+        <div class="dot" id="dot6" style="top: 310px; left: 265px;"></div>
         <img id="sbox" src="sboxx.png" >
-        <img id="trace" src="K.png" >
+        <img id="trace" src="k-new.png" >
         <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image"> 
       <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image"> 
        <img class="arrrow3" id="arrow3" src="without-bg.gif" alt="Overlay Image"> 
