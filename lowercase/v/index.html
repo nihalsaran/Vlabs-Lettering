@@ -51,10 +51,10 @@
             display: none;
             position: absolute;
             top: 75px;
-            left: 153px;
+            left: 132px;
             width: 15px;
             height: 250px;
-            transform: rotate(161deg);
+            transform: rotate(157deg);
 
 
         }
@@ -63,10 +63,10 @@
             display: none;
             position: absolute;
             top: 75px;
-            left: 234px;
+            left: 220px;
             width: 15px;
             height: 250px;
-            transform: rotate(199deg);
+            transform: rotate(203deg);
             z-index: -1;
 
         }
@@ -97,21 +97,20 @@
 
         #sbox {
             position: relative;
-            left: 90px;
-            width: 42s0px;
+            left: 115px;
+            width: 400px;
             height: 400px;
             z-index: -2;
-            top: 5px;
+            display: none;
         }
 
         #trace {
             position: relative;
-            top: -01px;
-            right: 230px;
-            width: 300px;
-            height: 250px;
-            z-index: -2;
-            
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
@@ -165,12 +164,12 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 83px; left: 125px;"></div> <!-- first line top dot-->
+        <div class="dot" id="dot3" style="top: 103px; left: 100px;"></div> <!-- first line top dot-->
         <!--    <div class="dot" id="dot4" style="top: 200px; left: 190px;"></div> -->
-        <div class="dot" id="dot1" style="top: 319px; left: 202px;"></div> <!-- first line bottom dot-->   
-        <div class="dot" id="dot5" style="top: 85px; left: 280px;"></div>
+        <div class="dot" id="dot1" style="top: 310px; left: 185px;"></div> <!-- first line bottom dot-->   
+        <div class="dot" id="dot5" style="top: 95px; left: 270px;"></div>
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="V.png">
+        <img id="trace" src="v-new.png">
         <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image">
         <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image">
         
@@ -286,6 +285,7 @@ function stopDrawing(e) {
             case 'dot1-dot5':
                 strokeId = '2';
                 arrow2.style.display = 'none';
+                dot5.style.display = 'none';
                 // Optionally loop back or end the sequence
                 // In this case, you may want to reset the connections, e.g., nextConnection = 'dot3-dot1';
                 break;
