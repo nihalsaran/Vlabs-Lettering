@@ -70,10 +70,10 @@
 
             display: none;
             position: absolute;
-            top: 50px;
-            left: 179px;
-            width: 109px;
-            height: 227px;
+            top: 0px;
+            left: 176px;
+            width: 10px;
+            height: 310px;
             transform: rotate(0deg);
 
 
@@ -82,10 +82,10 @@
         #stroke2 {
             display: none;
             position: absolute;
-            top: 85px;
-            left: 185px;
-            width: 7px;
-            height: 80px;
+            top: 50px;
+            left: 180px;
+            width: 10px;
+            height: 120px;
             transform: rotate(90deg);
             z-index: -1;
 
@@ -117,30 +117,27 @@
 
         #sbox {
             position: relative;
-            left: 93px;
-            width: 450px;
+            left: 115px;
+            width: 400px;
             height: 400px;
             z-index: -2;
-            top: 5px;
             display: none;
         }
 
         #trace {
             position: relative;
-            top: -01px;
-            right: 0px;
-            width: 350px;
-            height: 350px;
-            z-index: -2;
-            
-            
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
 
             position: absolute;
             top: 50px;
-            left: 124px;
+            left: 90px;
             width: 40px;
             height: 180px;
             transform: rotate(180deg);
@@ -187,16 +184,16 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 53px; left: 185px;"></div> <!-- first line top dot-->
-        <div class="dot4" id="dot4" style="top: 123px; left: 152px;"></div>
-        <div class="dot1" id="dot1" style="top: 125px; left: 225px;"></div> <!-- first line bottom dot-->
-        <div class="dot" id="dot5" style="top: 228px; left: 284px;"></div>
+        <div class="dot" id="dot3" style="top: 10px; left: 182px;"></div> <!-- first line top dot-->
+        <div class="dot4" id="dot4" style="top: 110px; left: 130px;"></div>
+        <div class="dot4" id="dot1" style="top: 110px; left: 240px;"></div> <!-- first line bottom dot-->
+        <div class="dot" id="dot5" style="top: 308px; left: 182px;"></div>
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="T.png">
+        <img id="trace" src="t-new.png">
         <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image">
         <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image">
 
-        <img id="stroke1" src="t-stroke.png">
+        <img id="stroke1" src="stroke1.png">
         <img id="stroke2" src="stroke1.png">
 
     </div>
