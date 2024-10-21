@@ -49,11 +49,11 @@
 
             display: none;
             position: absolute;
-            top: 52px;
-            left: 181px;
-            width: 8px;
+            top: 55px;
+            left: 174px;
+            width: 12px;
             height: 295px;
-            transform: rotate(145deg);
+            transform: rotate(141deg);
             z-index: -1;
 
         }
@@ -62,38 +62,38 @@
             display: none;
             position: absolute;
             top: 52px;
-            left: 180px;
-            width: 8px;
+            left: 174px;
+            width: 12px;
             height: 295px;
-            transform: rotate(215deg);
+            transform: rotate(219deg);
             z-index: -1;
 
         }
 
         #sbox {
             position: relative;
-            left: 95px;
+            left: 115px;
             width: 400px;
             height: 400px;
             z-index: -2;
-            top: 5px;
+            display: none;
         }
 
         #trace {
             position: relative;
-            top: -01px;
-            right: 215px;
-            width: 300px;
-            height: 250px;
-            z-index: -2;
+            bottom: 20px;
+            right: 90px;
+            width: 600px;
+            height: 550px;
+            z-index: -10;
         }
 
         .arrrow1 {
 
-            top: 100px;
-            left: 210px;
+            top: 80px;
+            left: 200px;
             position: absolute;
-            transform: rotate(145deg);
+            transform: rotate(140deg);
             z-index: 0;
             width: 30px;
             height: 190px;
@@ -102,10 +102,10 @@
 
         .arrrow2 {
 
-            top: 90px;
-            left: 140px;
+            top: 80px;
+            left: 130px;
             position: absolute;
-            transform: rotate(217deg);
+            transform: rotate(220deg);
             z-index: 0;
             width: 30px;
             height: 190px;
@@ -120,14 +120,14 @@
 
     <div id="canvas-container">
         <canvas id="canvas" width="400" height="400"></canvas>
-        <div class="dot" id="dot3" style="top: 83px; left: 100px;"></div> <!-- first line top dot-->
+        <div class="dot" id="dot3" style="top: 93px; left: 95px;"></div> <!-- first line top dot-->
         <!--    <div class="dot" id="dot4" style="top: 200px; left: 190px;"></div> -->
-        <div class="dot" id="dot1" style="top: 319px; left: 100px;"></div> <!-- first line bottom dot-->
-        <div class="dot" id="dot6" style="top: 82.5px; left: 270px;"></div> <!-- last line top dot-->
+        <div class="dot" id="dot1" style="top: 310px; left: 93px;"></div> <!-- first line bottom dot-->
+        <div class="dot" id="dot6" style="top: 95px; left: 265px;"></div> <!-- last line top dot-->
         <!--  <div class="dot" id="dot5" style="top: 310px; left: 202px;"></div> -->
-        <div class="dot" id="dot2" style="top: 319px; left: 270px;"></div> <!-- last line bottom dot-->
+        <div class="dot" id="dot2" style="top: 310px; left: 265px;"></div> <!-- last line bottom dot-->
         <img id="sbox" src="sboxx.png">
-        <img id="trace" src="X.png">
+        <img id="trace" src="x-new.png">
         <img class="arrrow1" id="arrow1" src="without-bg.gif" alt="Overlay Image">
         <img class="arrrow2" id="arrow2" src="without-bg.gif" alt="Overlay Image">
         
@@ -238,10 +238,14 @@ function stopDrawing(e) {
                 nextConnection = 'dot6-dot1';
                 arrow1.style.display = 'none';
                 arrow2.style.display = 'block';
+                dot3.style.display = 'none';
+                dot2.style.display = 'none';
                 break;
             case 'dot6-dot1':
                 strokeId = '2';
                 arrow2.style.display = 'none';
+                dot6.style.display = 'none';
+                dot1.style.display = 'none';
        
                 break;
         }
